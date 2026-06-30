@@ -22,7 +22,7 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="max-w-3xl mx-auto px-4 py-16 text-center">
-        <Badge variant="secondary" className="mb-4">Greater Portland Area</Badge>
+        <Badge variant="secondary" className="mb-4">Pre-Qualify Once. Work Anywhere.</Badge>
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 mb-4">
           Get Ahead of the Crowd.
           <br />
@@ -136,7 +136,7 @@ export default function LandingPage() {
                 <h3 className="font-semibold text-lg mb-1">Get Matched with Contractors</h3>
                 <p className="text-slate-600">
                   Once you pass both, you're qualified. You can tell any
-                  FedEx contractor in the Portland area: "I'm pre-qualified and
+                  FedEx contractor: "I'm pre-qualified and
                   ready for a road test." They'll know what that means.
                 </p>
               </div>
@@ -223,9 +223,9 @@ export default function LandingPage() {
             <div>
               <h3 className="font-semibold mb-1">Which terminals are available?</h3>
               <p className="text-slate-600 text-sm">
-                We're starting with the greater Portland area — Troutdale
-                (Terminal 971) and Swan Island (Terminal 961). More terminals
-                will be added as we grow.
+                We're starting with Troutdale (Terminal 971) and Swan Island
+                (Terminal 961) in the Portland area. More terminals will be
+                added as we grow.
               </p>
             </div>
           </div>
@@ -255,7 +255,7 @@ export default function LandingPage() {
       <footer className="py-8 border-t">
         <div className="max-w-5xl mx-auto px-4 text-center text-sm text-slate-500">
           <p>DriveForFedex.com — Pre-qualification for FedEx Ground driving jobs</p>
-          <p className="mt-1">Greater Portland Area · Troutdale & Swan Island</p>
+          <p className="mt-1">Troutdale & Swan Island · More terminals coming</p>
         </div>
       </footer>
     </div>

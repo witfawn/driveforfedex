@@ -1,7 +1,7 @@
 // App configuration
 export const ADMIN_EMAILS = ["john@witfawn.com"];
 
-// Portland-area FedEx Ground terminals
+// FedEx Ground terminals
 export const TERMINALS = [
   { code: "971", name: "Troutdale (Terminal 971)", address: "2460 NW Sundial Rd, Troutdale, OR 97060" },
   { code: "961", name: "Swan Island (Terminal 961)", address: "Portland, OR" },
