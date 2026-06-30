@@ -4,6 +4,7 @@ import { getToken } from "next-auth/jwt";
 
 // Paths that don't require authentication
 const PUBLIC_PATHS = [
+  "/",
   "/login",
   "/auth/verify",
 ];
