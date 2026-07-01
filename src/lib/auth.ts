@@ -101,7 +101,10 @@ export const authOptions: NextAuthOptions = {
             .where(eq(candidates.email, user.email))
             .limit(1);
 
-          if (existing.length === 0) {
+          if (existing.length > 0) {
+            // Existing user — use their DB ID so JWT matches
+            user.id = existing[0].id;
+          } else {
             // First time — create candidate in DB
             const id = user.id || crypto.randomUUID();
             await db.insert(candidates).values({
@@ -118,6 +121,9 @@ export const authOptions: NextAuthOptions = {
               candidateId: id,
               status: "new",
             });
+
+            // Use the DB id we created
+            user.id = id;
           }
         } catch (err) {
           console.error("Error creating candidate in DB:", err);
