@@ -1,7 +1,7 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useState, useEffect, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { TERMINALS, DAYS_OF_WEEK } from "@/lib/config";
 import { toast } from "sonner";
-import { ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check, Home, Menu, X, User, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -51,9 +52,24 @@ const defaultFormData: FormData = {
 export default function ProfilePage() {
   const { data: session, status: authStatus } = useSession();
   const queryClient = useQueryClient();
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState<FormData>(defaultFormData);
   const [loading, setLoading] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Save progress without navigating away
+  const saveProgress = useCallback(async () => {
+    try {
+      await fetch("/api/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch (err) {
+      console.error("Auto-save failed:", err);
+    }
+  }, [formData]);
 
   // Load existing profile data on mount
   useEffect(() => {
@@ -138,7 +154,65 @@ export default function ProfilePage() {
   const progressPercent = Math.round(((step + 1) / STEPS.length) * 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Header */}
+      <header className="bg-white border-b sticky top-0 z-50">
+        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+          <h1 className="font-bold text-lg">DriveForFedex</h1>
+          <div className="relative">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              aria-label="Menu"
+            >
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            {menuOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
+                <div className="absolute right-0 top-full mt-1 w-48 bg-white border rounded-lg shadow-lg z-50 py-1">
+                  <button
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 transition-colors w-full text-left"
+                    onClick={async () => {
+                      setMenuOpen(false);
+                      await saveProgress();
+                      router.push("/dashboard");
+                    }}
+                  >
+                    <Home className="w-4 h-4 text-slate-500" />
+                    Home
+                  </button>
+                  <button
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 transition-colors w-full text-left"
+                    onClick={async () => {
+                      setMenuOpen(false);
+                      await saveProgress();
+                      router.push("/dashboard/profile");
+                    }}
+                  >
+                    <User className="w-4 h-4 text-slate-500" />
+                    Profile
+                  </button>
+                  <div className="border-t my-1" />
+                  <button
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 transition-colors w-full text-left text-red-600"
+                    onClick={async () => {
+                      setMenuOpen(false);
+                      await saveProgress();
+                      signOut({ callbackUrl: "/" });
+                    }}
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </header>
+
+      <div className="p-4 sm:p-6">
       <div className="mx-auto max-w-2xl">
         {/* Progress indicator */}
         <div className="mb-6">
@@ -225,6 +299,7 @@ export default function ProfilePage() {
           </Link>
           .
         </p>
+      </div>
       </div>
     </div>
   );
