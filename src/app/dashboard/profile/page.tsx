@@ -112,7 +112,7 @@ export default function ProfilePage() {
       const res = await fetch("/api/profile", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, submitted: true }),
       });
       return res.json();
     },

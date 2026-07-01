@@ -46,17 +46,19 @@ export async function PUT(req: NextRequest) {
   if (body.hasVehicle !== undefined) profileData.hasVehicle = body.hasVehicle;
   if (body.additionalNotes !== undefined) profileData.additionalNotes = body.additionalNotes;
 
-  // Check if profile is complete (minimum: firstName, lastName, email)
-  const [updatedCandidate] = await db.select().from(candidates).where(eq(candidates.id, candidateId)).limit(1);
-  const isComplete = !!(updatedCandidate.firstName && updatedCandidate.lastName && updatedCandidate.email);
-  
-  if (isComplete && !updatedCandidate.profileComplete) {
-    await db.update(candidates).set({ profileComplete: true, updatedAt: new Date() }).where(eq(candidates.id, candidateId));
+  // Only mark profile complete on explicit submit (not auto-save)
+  if (body.submitted) {
+    const [updatedCandidate] = await db.select().from(candidates).where(eq(candidates.id, candidateId)).limit(1);
+    const isComplete = !!(updatedCandidate.firstName && updatedCandidate.lastName && updatedCandidate.phone && updatedCandidate.email);
     
-    // Update stage to profile_complete if currently "new"
-    const [stage] = await db.select().from(qualificationStages).where(eq(qualificationStages.candidateId, candidateId)).limit(1);
-    if (stage && stage.status === "new") {
-      await db.update(qualificationStages).set({ status: "profile_complete", updatedAt: new Date() }).where(eq(qualificationStages.id, stage.id));
+    if (isComplete && !updatedCandidate.profileComplete) {
+      await db.update(candidates).set({ profileComplete: true, updatedAt: new Date() }).where(eq(candidates.id, candidateId));
+      
+      // Update stage to profile_complete if currently "new"
+      const [stage] = await db.select().from(qualificationStages).where(eq(qualificationStages.candidateId, candidateId)).limit(1);
+      if (stage && stage.status === "new") {
+        await db.update(qualificationStages).set({ status: "profile_complete", updatedAt: new Date() }).where(eq(qualificationStages.id, stage.id));
+      }
     }
   }
 
