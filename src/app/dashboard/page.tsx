@@ -115,23 +115,17 @@ export default function DashboardPage() {
 
         {/* Profile completion alert */}
         {candidate && !candidate.profileComplete && (
-          <div className="rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 p-5">
-            <div className="flex items-start gap-4">
-              <div className="w-11 h-11 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
-                <ClipboardList className="w-5 h-5 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-slate-900 mb-1">Complete your profile</h3>
-                <p className="text-sm text-slate-500 mb-3">Takes about 2 minutes. Required to start your background check.</p>
-                <Link href="/dashboard/profile">
-                  <Button size="sm" className="gap-1.5">
-                    Get Started
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Button>
-                </Link>
-              </div>
+          <Link href="/dashboard/profile" className="block">
+            <div className="rounded-xl bg-primary/5 border border-primary/20 p-5 text-center hover:bg-primary/10 transition-colors cursor-pointer">
+              <ClipboardList className="w-8 h-8 text-primary mx-auto mb-2" />
+              <h3 className="font-semibold text-slate-900 mb-1">Complete your profile</h3>
+              <p className="text-sm text-slate-500 mb-3">Takes about 2 minutes to get started.</p>
+              <Button size="sm" className="gap-1.5">
+                Get Started
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Button>
             </div>
-          </div>
+          </Link>
         )}
 
         {/* Status Overview */}
