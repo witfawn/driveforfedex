@@ -1,11 +1,11 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Circle, Clock, ArrowRight, FileText, FlaskConical, User } from "lucide-react";
+import { CheckCircle2, Circle, Clock, ArrowRight, FileText, FlaskConical, User, LogOut } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -78,6 +78,10 @@ export default function DashboardPage() {
                 Profile
               </Button>
             </Link>
+            <Button variant="outline" size="sm" onClick={() => signOut({ callbackUrl: "/" })}>
+              <LogOut className="w-4 h-4 mr-1" />
+              Logout
+            </Button>
           </div>
         </div>
       </header>
