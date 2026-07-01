@@ -190,7 +190,7 @@ export default function LandingPage() {
               <h3 className="font-semibold mb-1">Do I have to pay anything?</h3>
               <p className="text-slate-600 text-sm">
                 No. Pre-qualifying through DriveForFedex is completely free for
-                candidates. Contractors pay for the background check and drug test.
+                candidates.
               </p>
             </div>
             <div>
