@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Circle, Clock, ArrowRight, FileText, FlaskConical, User, LogOut, Home, Menu, X } from "lucide-react";
+import { CheckCircle2, Circle, Clock, ArrowRight, FileText, FlaskConical, User, LogOut, Home, Menu, X, ClipboardList } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -115,17 +115,23 @@ export default function DashboardPage() {
 
         {/* Profile completion alert */}
         {candidate && !candidate.profileComplete && (
-          <Card className="border-primary/20 bg-primary/5">
-            <CardContent className="pt-6 flex items-center justify-between">
-              <div>
-                <p className="font-medium">Complete your profile to start the background check</p>
-                <p className="text-sm text-slate-500">We need at least your first name, last name, and email.</p>
+          <div className="rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 p-5">
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
+                <ClipboardList className="w-5 h-5 text-primary" />
               </div>
-              <Link href="/dashboard/profile">
-                <Button size="sm">Complete Profile</Button>
-              </Link>
-            </CardContent>
-          </Card>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-slate-900 mb-1">Complete your profile</h3>
+                <p className="text-sm text-slate-500 mb-3">Takes about 2 minutes. Required to start your background check.</p>
+                <Link href="/dashboard/profile">
+                  <Button size="sm" className="gap-1.5">
+                    Get Started
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Status Overview */}
