@@ -62,7 +62,8 @@ export default function DashboardPage() {
   const profile = data?.profile;
   const stage = data?.stage;
 
-  const currentStageIdx = stage ? getStageIndex(stage.status) : 0;
+  // +1 because Account Created (index 0) is always done once the user has logged in
+  const currentStageIdx = stage ? getStageIndex(stage.status) + 1 : 1;
   const displayName = candidate?.firstName || "";
 
   return (
