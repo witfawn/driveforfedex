@@ -108,10 +108,9 @@ export default function LandingPage() {
                 1
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-1">Create Your Profile</h3>
+                <h3 className="font-semibold text-lg mb-1">Sign Up</h3>
                 <p className="text-slate-600">
-                  Sign up with email or Google. Enter your name, work experience,
-                  available days, and preferred terminals. Takes 2 minutes.
+                  Sign up with email or Google. Takes 2 minutes.
                 </p>
               </div>
             </div>
@@ -122,9 +121,8 @@ export default function LandingPage() {
               <div>
                 <h3 className="font-semibold text-lg mb-1">Complete Background Check & Drug Test</h3>
                 <p className="text-slate-600">
-                  We send you a FirstAdvantage invite for your background check.
-                  Once that's processed, you'll get drug test instructions.
-                  We guide you through every step.
+                  We send you an invite for your background check. Once that
+                  process is complete, you'll get drug test instructions.
                 </p>
               </div>
             </div>
@@ -135,9 +133,10 @@ export default function LandingPage() {
               <div>
                 <h3 className="font-semibold text-lg mb-1">Get Matched with Contractors</h3>
                 <p className="text-slate-600">
-                  Once you pass both, you're qualified. You can tell any
-                  FedEx contractor: "I'm pre-qualified and
-                  ready for a road test." They'll know what that means.
+                  Once you pass both, you're qualified. We'll share your
+                  information with the contractors we work with. You can also
+                  reach out to contractors directly — just let them know
+                  you're pre-qualified and ready for a road test.
                 </p>
               </div>
             </div>
@@ -157,10 +156,10 @@ export default function LandingPage() {
                 <Package className="w-8 h-8 text-primary mb-3" />
                 <h3 className="font-semibold mb-2">The Job</h3>
                 <ul className="text-sm text-slate-600 space-y-1">
-                  <li>• Deliver 80–180 packages per day on local routes</li>
-                  <li>• Load your truck, follow your route, deliver with care</li>
+                  <li>• Deliver packages on local routes</li>
+                  <li>• Routes are pre-loaded — follow your route and deliver with care</li>
                   <li>• Work independently — you're trusted to get it done</li>
-                  <li>• Full-time, 5 days/week (weekends required to start)</li>
+                  <li>• Full-time and part-time positions available</li>
                 </ul>
               </CardContent>
             </Card>
@@ -223,9 +222,8 @@ export default function LandingPage() {
             <div>
               <h3 className="font-semibold mb-1">Which terminals are available?</h3>
               <p className="text-slate-600 text-sm">
-                We're starting with Troutdale (Terminal 971) and Swan Island
-                (Terminal 961) in the Portland area. More terminals will be
-                added as we grow.
+                We're starting with Troutdale and Swan Island in the
+                Portland area. More locations coming as we grow.
               </p>
             </div>
           </div>
@@ -254,8 +252,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-8 border-t">
         <div className="max-w-5xl mx-auto px-4 text-center text-sm text-slate-500">
-          <p>DriveForFedex.com — Pre-qualification for FedEx Ground driving jobs</p>
-          <p className="mt-1">Troutdale & Swan Island · More terminals coming</p>
+          <p>Drive for FedEx.com — Pre-qualification for FedEx Ground driving jobs</p>
         </div>
       </footer>
     </div>

@@ -3,8 +3,8 @@ export const ADMIN_EMAILS = ["john@witfawn.com"];
 
 // FedEx Ground terminals
 export const TERMINALS = [
-  { code: "971", name: "Troutdale (Terminal 971)", address: "2460 NW Sundial Rd, Troutdale, OR 97060" },
-  { code: "961", name: "Swan Island (Terminal 961)", address: "Portland, OR" },
+  { code: "971", name: "Troutdale", address: "2460 NW Sundial Rd, Troutdale, OR 97060" },
+  { code: "961", name: "Swan Island", address: "6447 N Cutter Circle, Portland, OR 97217" },
 ];
 
 export const DAYS_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

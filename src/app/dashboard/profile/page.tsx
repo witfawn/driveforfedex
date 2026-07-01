@@ -122,6 +122,7 @@ export default function ProfilePage() {
 
   const canProceed = () => {
     if (step === 0) return formData.firstName.trim() && formData.lastName.trim();
+    if (step === 1) return formData.phone.trim().length > 0;
     return true;
   };
 
@@ -239,7 +240,7 @@ export default function ProfilePage() {
 function getStepTitle(step: number): string {
   switch (step) {
     case 0:
-      return "What&rsquo;s your name?";
+      return "What's your name?";
     case 1:
       return "Phone Number";
     case 2:
@@ -247,9 +248,9 @@ function getStepTitle(step: number): string {
     case 3:
       return "Available Days";
     case 4:
-      return "Preferred Terminals";
+      return "Available Terminals";
     case 5:
-      return "Review &amp; Submit";
+      return "Review & Submit";
     default:
       return "";
   }
@@ -260,13 +261,13 @@ function getStepDescription(step: number): string {
     case 0:
       return "Let us know who you are.";
     case 1:
-      return "Optional — we&rsquo;ll use this to reach you about opportunities.";
+      return "We\'ll use this to reach you about opportunities.";
     case 2:
-      return "Tell us about your previous driving or relevant work experience.";
+      return "Tell us about your previous driving or relevant work experience. This will be visible to FedEx contractors reviewing candidates.";
     case 3:
       return "Which days of the week are you available to work?";
     case 4:
-      return "Which FedEx Ground terminals are you interested in?";
+      return "Select all the terminals you are willing to work at.";
     case 5:
       return "Please review your information before submitting.";
     default:
@@ -322,7 +323,7 @@ function renderPhoneStep(
 ) {
   return (
     <div className="space-y-2">
-      <Label htmlFor="phone">Phone Number</Label>
+      <Label htmlFor="phone">Phone Number <span className="text-destructive">*</span></Label>
       <Input
         id="phone"
         type="tel"
@@ -333,7 +334,7 @@ function renderPhoneStep(
         }
       />
       <p className="text-xs text-slate-400">
-        Optional. Used for SMS updates about your application.
+        Used for SMS updates about your application.
       </p>
     </div>
   );
@@ -408,7 +409,7 @@ function renderTerminalsStep(
 ) {
   return (
     <div className="space-y-3">
-      <p className="text-sm text-slate-600">Select your preferred terminal(s):</p>
+      <p className="text-sm text-slate-600">Select all terminals you are willing to work at:</p>
       <div className="flex flex-col gap-3">
         {TERMINALS.map((terminal) => {
           const active = formData.preferredTerminals.includes(terminal.code);
@@ -510,7 +511,7 @@ function renderReviewStep(
 
       {/* Terminals */}
       <div>
-        <h3 className="text-sm font-semibold text-slate-900 mb-2">Preferred Terminals</h3>
+        <h3 className="text-sm font-semibold text-slate-900 mb-2">Available Terminals</h3>
         <div className="rounded-lg border bg-slate-50 px-4 py-2.5">
           {formData.preferredTerminals.length > 0 ? (
             <div className="flex flex-wrap gap-1.5">
@@ -526,33 +527,6 @@ function renderReviewStep(
           ) : (
             <p className="text-sm text-slate-400 italic">None selected</p>
           )}
-        </div>
-      </div>
-
-      {/* CDL & Vehicle */}
-      <div>
-        <h3 className="text-sm font-semibold text-slate-900 mb-2">Licensing &amp; Equipment</h3>
-        <div className="rounded-lg border bg-slate-50 divide-y divide-slate-100">
-          <div className="flex justify-between px-4 py-2.5 text-sm">
-            <span className="text-slate-500">Has CDL?</span>
-            <span className="font-medium">
-              {formData.hasCDL ? (
-                <Badge variant="success">Yes</Badge>
-              ) : (
-                <Badge variant="warning">No</Badge>
-              )}
-            </span>
-          </div>
-          <div className="flex justify-between px-4 py-2.5 text-sm">
-            <span className="text-slate-500">Has Vehicle?</span>
-            <span className="font-medium">
-              {formData.hasVehicle ? (
-                <Badge variant="success">Yes</Badge>
-              ) : (
-                <Badge variant="warning">No</Badge>
-              )}
-            </span>
-          </div>
         </div>
       </div>
 

@@ -1,11 +1,12 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Circle, Clock, ArrowRight, FileText, FlaskConical, User, LogOut } from "lucide-react";
+import { CheckCircle2, Circle, Clock, ArrowRight, FileText, FlaskConical, User, LogOut, Home, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -34,6 +35,7 @@ function resultBadge(result: string | null | undefined, label: string) {
 
 export default function DashboardPage() {
   const { data: session, status: authStatus } = useSession();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ["profile"],
@@ -61,9 +63,7 @@ export default function DashboardPage() {
   const stage = data?.stage;
 
   const currentStageIdx = stage ? getStageIndex(stage.status) : 0;
-  const displayName = candidate?.firstName 
-    ? `${candidate.firstName} ${candidate.lastName || ""}`.trim()
-    : candidate?.email || "Candidate";
+  const displayName = candidate?.firstName || "";
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -71,17 +71,34 @@ export default function DashboardPage() {
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
           <h1 className="font-bold text-lg">DriveForFedex</h1>
-          <div className="flex items-center gap-3">
-            <Link href="/dashboard/profile">
-              <Button variant="outline" size="sm">
-                <User className="w-4 h-4 mr-1" />
-                Profile
-              </Button>
-            </Link>
-            <Button variant="outline" size="sm" onClick={() => signOut({ callbackUrl: "/" })}>
-              <LogOut className="w-4 h-4 mr-1" />
-              Logout
-            </Button>
+          <div className="relative">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              aria-label="Menu"
+            >
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            {menuOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
+                <div className="absolute right-0 top-full mt-1 w-48 bg-white border rounded-lg shadow-lg z-50 py-1">
+                  <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 transition-colors" onClick={() => setMenuOpen(false)}>
+                    <Home className="w-4 h-4 text-slate-500" />
+                    Home
+                  </Link>
+                  <Link href="/dashboard/profile" className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 transition-colors" onClick={() => setMenuOpen(false)}>
+                    <User className="w-4 h-4 text-slate-500" />
+                    Profile
+                  </Link>
+                  <div className="border-t my-1" />
+                  <button className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 transition-colors w-full text-left text-red-600" onClick={() => signOut({ callbackUrl: "/" })}>
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -89,9 +106,9 @@ export default function DashboardPage() {
       <main className="max-w-3xl mx-auto px-4 py-8 space-y-6">
         {/* Welcome */}
         <div>
-          <h2 className="text-2xl font-bold">Welcome, {displayName}</h2>
+          <h2 className="text-2xl font-bold">Welcome{displayName ? `, ${displayName}` : ""}</h2>
           <p className="text-slate-500 text-sm mt-1">
-            Here&rsquo;s where you are in the qualification process.
+            Here's where you are in the qualification process.
           </p>
         </div>
 
