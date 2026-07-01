@@ -15,7 +15,7 @@ export default function LandingPage() {
             <span className="font-bold text-lg">DriveForFedex</span>
           </div>
           <Link href="/login">
-            <Button variant="outline" size="sm">Sign Up</Button>
+            <Button variant="outline" size="sm">Sign In</Button>
           </Link>
         </div>
       </nav>
@@ -37,7 +37,7 @@ export default function LandingPage() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link href="/login">
             <Button size="lg" className="w-full sm:w-auto">
-              Sign Up
+              Get Started
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </Link>
@@ -241,7 +241,7 @@ export default function LandingPage() {
           </p>
           <Link href="/login">
             <Button size="lg" variant="secondary">
-              Sign Up
+              Get Started
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </Link>
