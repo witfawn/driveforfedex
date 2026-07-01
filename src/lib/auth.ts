@@ -4,11 +4,19 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyMagicToken } from "@/lib/magic-link";
 import { getRandomColor } from "@/lib/config";
 
+// Debug: log env var availability on module load
+const _gcid = process.env.GOOGLE_CLIENT_ID;
+const _gcsec = process.env.GOOGLE_CLIENT_SECRET;
+const _nurl = process.env.NEXTAUTH_URL;
+console.log(`[AUTH INIT] GOOGLE_CLIENT_ID=${_gcid ? "SET(" + _gcid.substring(0, 10) + "...)" : "EMPTY"}`);
+console.log(`[AUTH INIT] GOOGLE_CLIENT_SECRET=${_gcsec ? "SET(" + _gcsec.substring(0, 5) + "...)" : "EMPTY"}`);
+console.log(`[AUTH INIT] NEXTAUTH_URL=${_nurl || "EMPTY"}`);
+
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
     CredentialsProvider({
       name: "Magic Link",
