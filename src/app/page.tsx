@@ -15,7 +15,7 @@ export default function LandingPage() {
             <span className="font-bold text-lg">DriveForFedex</span>
           </div>
           <Link href="/login">
-            <Button variant="outline" size="sm">Sign In</Button>
+            <Button variant="outline" size="sm">Sign Up</Button>
           </Link>
         </div>
       </nav>
