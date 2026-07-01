@@ -257,7 +257,7 @@ export default function ProfilePage() {
             <CardDescription>{getStepDescription(step)}</CardDescription>
           </CardHeader>
           <CardContent>
-            {step === 0 && renderNameStep(formData, setFormData)}
+            {step === 0 && renderNameStep(formData, setFormData, session.user.email || "")}
             {step === 1 && renderPhoneStep(formData, setFormData)}
             {step === 2 && renderExperienceStep(formData, setFormData)}
             {step === 3 && renderAvailabilityStep(formData, toggleArray)}
@@ -355,9 +355,19 @@ function getStepDescription(step: number): string {
 function renderNameStep(
   formData: FormData,
   setFormData: React.Dispatch<React.SetStateAction<FormData>>,
+  email: string,
 ) {
   return (
     <div className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          value={email}
+          readOnly
+          className="bg-slate-50 text-slate-500"
+        />
+      </div>
       <div className="space-y-2">
         <Label htmlFor="firstName">
           First Name <span className="text-destructive">*</span>
@@ -484,7 +494,6 @@ function renderTerminalsStep(
 ) {
   return (
     <div className="space-y-3">
-      <p className="text-sm text-slate-600">Select all terminals you are willing to work at:</p>
       <div className="flex flex-col gap-3">
         {TERMINALS.map((terminal) => {
           const active = formData.preferredTerminals.includes(terminal.code);
