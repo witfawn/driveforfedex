@@ -37,7 +37,7 @@ export default function LandingPage() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link href="/login">
             <Button size="lg" className="w-full sm:w-auto">
-              Start Your Pre-Qualification
+              Sign Up
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </Link>
@@ -110,7 +110,7 @@ export default function LandingPage() {
               <div>
                 <h3 className="font-semibold text-lg mb-1">Sign Up</h3>
                 <p className="text-slate-600">
-                  Sign up with email or Google. Takes 2 minutes.
+                  Sign up with email. Complete your profile. Takes 2 minutes.
                 </p>
               </div>
             </div>
@@ -121,8 +121,7 @@ export default function LandingPage() {
               <div>
                 <h3 className="font-semibold text-lg mb-1">Complete Background Check & Drug Test</h3>
                 <p className="text-slate-600">
-                  We send you an invite for your background check. Once that
-                  process is complete, you'll get drug test instructions.
+                  We send you an email invite to fill out the background check application. Once you submit, you'll get drug test instructions.
                 </p>
               </div>
             </div>
@@ -242,7 +241,7 @@ export default function LandingPage() {
           </p>
           <Link href="/login">
             <Button size="lg" variant="secondary">
-              Get Started
+              Sign Up
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </Link>
