@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -57,6 +57,7 @@ export default function ProfilePage() {
   const [formData, setFormData] = useState<FormData>(defaultFormData);
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const profileLoaded = useRef(false);
 
   // Save progress without navigating away
   const saveProgress = useCallback(async () => {
@@ -71,9 +72,10 @@ export default function ProfilePage() {
     }
   }, [formData]);
 
-  // Load existing profile data on mount
+  // Load existing profile data on mount (only once)
   useEffect(() => {
-    if (session?.user) {
+    if (session?.user && !profileLoaded.current) {
+      profileLoaded.current = true;
       fetch("/api/profile")
         .then((r) => r.json())
         .then((data) => {
