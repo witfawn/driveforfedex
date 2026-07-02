@@ -269,25 +269,25 @@ export default function ProfilePage() {
         </Card>
 
         {/* Navigation buttons */}
-        {step < 5 && (
-          <div className="flex items-center justify-between mt-4">
-            {step > 0 ? (
-              <Button
-                variant="outline"
-                onClick={() => setStep((s) => s - 1)}
-              >
-                <ChevronLeft className="w-4 h-4 mr-1" />
-                Back
-              </Button>
-            ) : (
-              <div />
-            )}
+        <div className="flex items-center justify-between mt-4">
+          {step > 0 ? (
+            <Button
+              variant="outline"
+              onClick={() => setStep((s) => s - 1)}
+            >
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              Back
+            </Button>
+          ) : (
+            <div />
+          )}
+          {step < 5 && (
             <Button onClick={handleNext} disabled={!canProceed()}>
               Next
               <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
+          )}
           </div>
-        )}
 
         {/* Footer */}
         <p className="text-center text-xs text-slate-400 mt-6">
